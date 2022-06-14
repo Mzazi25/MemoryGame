@@ -12,6 +12,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="?attr/colorSecondaryVariant"
         app:layout_constraintStart_toStartOf="parent">
 
         <androidx.cardview.widget.CardView
