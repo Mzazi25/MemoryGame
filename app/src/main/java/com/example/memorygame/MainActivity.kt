@@ -2,6 +2,7 @@ package com.example.memorygame
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintLayoutStates
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvNumMoves : TextView
     private lateinit var clRoot: ConstraintLayout
 
-    private var boardSize: BoardSize = BoardSize.Hard
+    private var boardSize: BoardSize = BoardSize.Easy
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,10 +59,17 @@ class MainActivity : AppCompatActivity() {
         }
         if(memoryGame.isCardFaceUp(position)){
             //Alert User of an invalid move
-            Snackbar.make(clRoot, "Invalid Move!",Snackbar.LENGTH_LONG).show()
+            Snackbar.make(clRoot, "Invalid Move!",Snackbar.LENGTH_SHORT).show()
             return
         }
-       memoryGame.flipCard(position)
+        if(memoryGame.flipCard(position)){
+            Log.i(TAG, "Found a match NumPairs found ${memoryGame.numPairsFound}")
+            tvNumPairs.text = "Pairs:${memoryGame.numPairsFound}/${boardSize.getNumPairs()}"
+            if(memoryGame.haveWonGame()){
+                Snackbar.make(clRoot,"You won, Congratulations!" , Snackbar.LENGTH_LONG).show()
+            }
+        }
+        tvNumMoves.text = "Moves: ${memoryGame.getNumMoves()}"
         adapter.notifyDataSetChanged()
     }
 

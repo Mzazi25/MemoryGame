@@ -58,7 +58,7 @@ class MemoryBoardAdapter(
             imageButton.setImageResource(if(memoryCard.isFaceUp) memoryCard.identifier else R.drawable.ic_launcher_background)
 
             imageButton.alpha =if(memoryCard.isMatched).4f else 1.0f
-            val colorStateList = if (memoryCard.isMatched) ContextCompat.getColorStateList(context,R.color.color_gray) else null
+            val colorStateList = if (memoryCard.isMatched) ContextCompat.getColorStateList(context,R.color.color_gray)else null
             ViewCompat.setBackgroundTintList(imageButton, colorStateList)
             imageButton.setOnClickListener {
                 Log.i(TAG, "Clicked on position $position")
