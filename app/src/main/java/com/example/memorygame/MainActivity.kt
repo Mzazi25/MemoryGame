@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         tvNumPairs = findViewById(R.id.tvNumPairs)
         tvNumMoves = findViewById(R.id.tvNumMoves)
         clRoot = findViewById(R.id.clRoot)
+        tvNumPairs.setTextColor(ContextCompat.getColor(this,R.color.color_progress_none))
 
         memoryGame = MemoryGame(boardSize)
 
