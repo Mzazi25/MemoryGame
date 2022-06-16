@@ -12,7 +12,7 @@ class MemoryGame (private val boardSize: BoardSize){
     init{
         val chosenImages = DEFAULT_ICONS.shuffled().take(boardSize.getNumPairs())
         val randomizedImages =(chosenImages +chosenImages ).shuffled()
-        cards = randomizedImages.map { MemoryCard(it, isFaceUp = false, isMatched = false) }
+        cards = randomizedImages.map { MemoryCard(it) }
     }
 
     fun flipCard(position: Int): Boolean{
@@ -50,6 +50,14 @@ class MemoryGame (private val boardSize: BoardSize){
             }
 
         }
+    }
+
+    fun haveWonGame(): Boolean {
+       return  numPairsFound == boardSize.getNumPairs()
+    }
+
+    fun isCardFaceUp(position: Int): Boolean {
+        return cards[position].isFaceUp
     }
 
 }
