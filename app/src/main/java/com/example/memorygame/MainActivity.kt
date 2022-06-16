@@ -1,12 +1,15 @@
 package com.example.memorygame
 
 import android.animation.ArgbEvaluator
+import android.icu.text.CaseMap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintLayoutStates
 import androidx.core.content.ContextCompat
@@ -47,13 +50,31 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.mi_refresh ->{
+                if(memoryGame.getNumMoves() > 0 && !memoryGame.haveWonGame()){
+                    showAlertDialog("Quit your current Game?", null,View.OnClickListener {
+                        setupBoard()
+                    })
+                }else{
+                    setupBoard()
+                }
                 //Setup the game again
-                setupBoard()
-
             }
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun showAlertDialog(title: String, view: View?,positiveClickListener:View.OnClickListener) {
+        AlertDialog.Builder(this)
+            .setView(view)
+            .setTitle(title)
+            .setNegativeButton("Cancel",null)
+            .setPositiveButton("Ok"){_,_->
+                positiveClickListener.onClick(null)
+
+            }.show()
+
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return true
