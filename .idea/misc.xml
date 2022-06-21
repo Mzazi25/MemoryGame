@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_refresh.xml" value="0.726" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.6927083333333334" />
         <entry key="app/src/main/res/layout/dialog_board_size.xml" value="0.7234375" />
         <entry key="app/src/main/res/layout/memory_card.xml" value="0.7234375" />
