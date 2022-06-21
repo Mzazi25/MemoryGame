@@ -1,6 +1,8 @@
 package com.example.memorygame
 
 import android.animation.ArgbEvaluator
+import android.app.Instrumentation
+import android.content.Intent
 import android.icu.text.CaseMap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +13,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.RadioGroup
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintLayoutStates
@@ -19,6 +22,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.memorygame.models.BoardSize
 import com.example.memorygame.models.MemoryGame
+import com.example.memorygame.utils.EXTRA_BOARD_SIZE
 import com.google.android.material.snackbar.Snackbar
 
 
@@ -26,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object{
         private const val TAG = "MainActivity"
+//        private const val CREATE_REQUEST_CODE = 248
     }
 
     private lateinit var memoryGame: MemoryGame
@@ -91,7 +96,12 @@ class MainActivity : AppCompatActivity() {
 
                 else ->BoardSize.Hard
             }
-            // Navigate the user to a new board activity
+
+            val intent = Intent(this, CreateActivity::class.java)
+            intent.putExtra(EXTRA_BOARD_SIZE,desiredBoardSize)
+            startActivity(intent)
+
+
         })
 
 

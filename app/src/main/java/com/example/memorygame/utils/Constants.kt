@@ -2,6 +2,8 @@ package com.example.memorygame.utils
 
 import com.example.memorygame.R
 
+const val EXTRA_BOARD_SIZE = "EXTRA_BOARD_SIZE"
+
 val DEFAULT_ICONS = listOf(
     R.drawable.ic_bike,
     R.drawable.ic_face,
