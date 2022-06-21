@@ -5,9 +5,11 @@ import android.icu.text.CaseMap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -58,9 +60,39 @@ class MainActivity : AppCompatActivity() {
                     setupBoard()
                 }
                 //Setup the game again
+                return true
+            }
+            R.id.mi_new_size ->{
+                showNewSizeDialog()
+                return true
+
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun showNewSizeDialog() {
+        val boardSizeView = LayoutInflater.from(this).inflate(R.layout.dialog_board_size, null)
+        val radioGroupSize = boardSizeView.findViewById<RadioGroup>(R.id.radioGroup)
+        when(boardSize){
+            BoardSize.Easy -> radioGroupSize.check(R.id.rbEasy)
+            BoardSize.Medium -> radioGroupSize.check(R.id.rbMedium)
+            BoardSize.Hard -> radioGroupSize.check(R.id.rbHard)
+        }
+        showAlertDialog("Choose New Size",boardSizeView, View.OnClickListener {
+            //Set new value for the board size
+            boardSize = when (radioGroupSize.checkedRadioButtonId){
+                R.id.rbEasy ->{
+                    BoardSize.Easy
+                }
+                R.id.rbMedium ->{
+                    BoardSize.Medium
+                }
+
+                else ->BoardSize.Hard
+            }
+            setupBoard()
+        })
     }
 
     private fun showAlertDialog(title: String, view: View?,positiveClickListener:View.OnClickListener) {
