@@ -81,6 +81,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBoard() {
+        when(boardSize){
+            BoardSize.Easy -> {
+                tvNumMoves.text = "Easy: 4 *2"
+                tvNumPairs.text = "Pairs:0/4"
+            }
+            BoardSize.Medium -> {
+                tvNumMoves.text = "Medium: 6 *3"
+                tvNumPairs.text = "Pairs:0/9"
+            }
+            BoardSize.Hard -> {
+                tvNumMoves.text = "Hard: 6 *4"
+                tvNumPairs.text = "Pairs:0/12"
+            }
+
+        }
         tvNumPairs.setTextColor(ContextCompat.getColor(this,R.color.color_progress_none))
         memoryGame = MemoryGame(boardSize)
         adapter = MemoryBoardAdapter(this, boardSize,memoryGame.cards, object: MemoryBoardAdapter.CardClickListener{
